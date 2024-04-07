@@ -1,0 +1,29 @@
+@import '/src/index.css';
+
+.card {
+  background-color: var(--main-color);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3%;
+}
+
+.card-front {
+  visibility: hidden;
+  position: absolute;
+}
+
+.card-front.visible {
+  visibility: visible;
+}
+
+.card-back {
+  visibility: hidden;
+  position: absolute;
+}
+
+.card-back.visible {
+  visibility: visible;
+}

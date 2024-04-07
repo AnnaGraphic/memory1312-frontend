@@ -1,4 +1,4 @@
-import MemoryGame from '../components/MemoryGame/MemoryGame'
+import MemoryGame from './components/MemoryGame/MemoryGame'
 
 function App() {
 
