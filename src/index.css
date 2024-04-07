@@ -2,10 +2,17 @@
   --main-color: #ffff00;
   --main-color-darker: #d1d10f;
   --secondary-color: #25ee5e;
+  --dark-color: #1b1b1b;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--dark-color);
 }
