@@ -1,9 +1,9 @@
 import './MemoryCard.css';
 
-function MemoryCard({ id, name, image, onClick, isFlipped }) {
+function MemoryCard({ card, name, image, onClick, isFlipped }) {
 
   const handleClick = () => {
-    onClick(id, name);
+    onClick(card);
   };
 
   return (

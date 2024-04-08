@@ -33,6 +33,13 @@ function reducer(state, action) {
           card.id === action.payload ? { ...card, isFlipped: !card.isFlipped } : card
         )
       };
+    case 'UNFLIP_CARDS':
+      return {
+        ...state,
+        cardsData: state.cardsData.map(card =>
+          action.payload.includes(card.id) ? { ...card, isFlipped: false } : card
+        )
+      };
     default:
       return state;
   }
@@ -45,6 +52,10 @@ function MemoryGame() {
       dispatch({ type: 'SET_CARDS_DATA', payload: shuffleArray(initialCardsData) });
     }, []);
 
+    useEffect(() => {
+      checkForMatch();
+    }, [state.secondCard]);
+
     function shuffleArray(array) {
       let idCounter = 0;
       // double cards to get pairs        
@@ -56,8 +67,7 @@ function MemoryGame() {
       return pairsArray;
     }
 
-    const checkForMatch = (card) => {
-      console.log(firstCard, secondCard)
+    const checkForMatch = () => {
       console.log('checkForMatch');
       const { firstCard, secondCard } = state;
       if (firstCard && secondCard) {
@@ -78,6 +88,7 @@ function MemoryGame() {
             dispatch({ type: 'FlIP_CARD', payload: secondCard });
             dispatch({ type: 'SET_FIRST_CARD', payload: null });
             dispatch({ type: 'SET_SECOND_CARD', payload: null });
+            dispatch({ type: 'UNFLIP_CARDS', payload: [firstCard.id, secondCard.id] });
             dispatch({ type: 'LOCK_BOARD', payload: false });
           }, 1600);
         }
@@ -92,7 +103,7 @@ function MemoryGame() {
         console.log('firstCard: ', state.firstCard);
       } else if (!state.secondCard) {
         dispatch({ type: 'SET_SECOND_CARD', payload: card });
-        checkForMatch(card);
+        //checkForMatch();
       }
       dispatch({ type: 'FLIP_CARD', payload: card.id });
     };
@@ -102,11 +113,12 @@ function MemoryGame() {
           <section className="board">
             {state.cardsData.map((card, id) => (
               <MemoryCard
+                card={card}
                 key={id}
                 name={card.name}
                 image={card.image}
                 isFlipped={card.isFlipped}
-                onClick={() => handleCardClick(card)} 
+                onClick={handleCardClick}
               />
             ))}
           </section>
