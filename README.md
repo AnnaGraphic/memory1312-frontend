@@ -1,4 +1,4 @@
-# memory 1312
+# memory 1312 -- frontend
 ## project description:
   multiplayer game - 2-? players playing memory
   when a pair is flipped correctly, all players are shown a text on their device that is specifically assigned to that pair.the flipping player's score is increased by one. when all cards are revealed, the game is over and the scores are displayed.
@@ -30,7 +30,7 @@
     - [] cards!
     - [] time?
 ### frontend
-    - [] reuse / clone an existing frontend i.o. to save time
+    - [X] <del>reuse / clone an existing frontend i.o. to save time</del> - start from scratch
 ### databases
     - [] mongoDB / postgres?
     - [] table for cards
