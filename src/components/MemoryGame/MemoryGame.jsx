@@ -2,15 +2,10 @@ import './MemoryGame.css';
 import { useEffect, useReducer } from 'react';
 import MemoryCard from '../MemoryCard/MemoryCard';
 
-const initialCardsData = [
-  { name: "🪲", image: "img/1.svg" },
-  { name: "🏵️", image: "img/2.svg" },
-  { name: "🐦", image: "img/3.svg" },
-  { name: "😸", image: "img/4.svg" },
-];
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const initialState = {
-  cardsData: initialCardsData,
+  cardsData: [],
   firstCard: null,
   secondCard: null,
   lockBoard: false,
@@ -49,7 +44,20 @@ function MemoryGame() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-      dispatch({ type: 'SET_CARDS_DATA', payload: shuffleArray(initialCardsData) });
+      const fetchInitialCardsData = async () => {
+        try {
+          const response = await fetch(`${baseUrl}/cards}`);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch cards: ${response.status} - ${response.statusText}`);
+          }
+          const cardsData = await response.json();
+          dispatch({ type: 'SET_CARDS_DATA', payload: shuffleArray(cardsData) });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchInitialCardsData();
     }, []);
 
     useEffect(() => {
