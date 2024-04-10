@@ -46,7 +46,7 @@ function MemoryGame() {
     useEffect(() => {
       const fetchInitialCardsData = async () => {
         try {
-          const response = await fetch(`${baseUrl}/cards}`);
+          const response = await fetch(`${baseUrl}/cards`);
           if (!response.ok) {
             throw new Error(`Failed to fetch cards: ${response.status} - ${response.statusText}`);
           }

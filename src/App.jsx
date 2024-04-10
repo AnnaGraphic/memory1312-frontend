@@ -1,3 +1,4 @@
+import GameChat from './components/GameChat/GameChat'
 import MemoryGame from './components/MemoryGame/MemoryGame'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <div className="App">
         <MemoryGame />
+        <GameChat />
       </div>
     </>
   )
