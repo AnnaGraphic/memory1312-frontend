@@ -2,6 +2,7 @@ import './MemoryGame.css';
 import { useEffect, useReducer } from 'react';
 import MemoryCard from '../MemoryCard/MemoryCard';
 import { useGameContext } from '../../contexts/gameContext';
+import { Button } from '../Button/SubmitButton';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
