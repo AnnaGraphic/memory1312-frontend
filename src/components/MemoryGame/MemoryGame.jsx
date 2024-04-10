@@ -1,47 +1,12 @@
 import './MemoryGame.css';
 import { useEffect, useReducer } from 'react';
 import MemoryCard from '../MemoryCard/MemoryCard';
+import { useGameContext } from '../../contexts/gameContext';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const initialState = {
-  cardsData: [],
-  firstCard: null,
-  secondCard: null,
-  lockBoard: false,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'SET_CARDS_DATA':
-      return { ...state, cardsData: action.payload };
-    case 'SET_FIRST_CARD':
-      return { ...state, firstCard: action.payload };
-    case 'SET_SECOND_CARD':
-      return { ...state, secondCard: action.payload };
-    case 'LOCK_BOARD':
-      return { ...state, lockBoard: action.payload };
-    case 'FLIP_CARD':
-      return {
-        ...state,
-        cardsData: state.cardsData.map(card =>
-          card.id === action.payload ? { ...card, isFlipped: !card.isFlipped } : card
-        )
-      };
-    case 'UNFLIP_CARDS':
-      return {
-        ...state,
-        cardsData: state.cardsData.map(card =>
-          action.payload.includes(card.id) ? { ...card, isFlipped: false } : card
-        )
-      };
-    default:
-      return state;
-  }
-}
-
 function MemoryGame() {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const { state, dispatch } = useGameContext();
 
     useEffect(() => {
       const fetchInitialCardsData = async () => {
@@ -118,6 +83,8 @@ function MemoryGame() {
 
     return (
         <div className="container">
+          <h1>memory 1312</h1>
+          <h2>player <strong>{state.currentPlayer.name}'s</strong> turn</h2>
           <section className="board">
             {state.cardsData.map((card, id) => (
               <MemoryCard
