@@ -3,7 +3,9 @@ import './MemoryCard.css';
 function MemoryCard({ card, name, image, onClick, isFlipped }) {
 
   const handleClick = () => {
-    onClick(card);
+    if(!isFlipped) {
+      onClick(card);
+    }
   };
 
   return (
