@@ -1,15 +1,15 @@
 @import '/src/index.css';
 
 .container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .board {
-    display: grid; 
-    margin: auto; 
-    margin-top: 3rem; 
-    grid-template-columns: repeat(4, 9rem); 
-    place-items: center; 
-    row-gap: 2rem; 
-  }
+  display: grid;
+  margin: auto;
+  margin-top: 3rem;
+  grid-template-columns: repeat(4, 9rem);
+  place-items: center;
+  row-gap: 2rem;
+}
