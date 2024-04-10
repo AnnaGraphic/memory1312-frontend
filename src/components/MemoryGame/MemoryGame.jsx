@@ -28,7 +28,17 @@ function MemoryGame() {
 
   useEffect(() => {
     checkForMatch();
+    resetCards();
   }, [state.secondCard]);
+
+  useEffect(() => {
+    //TODO: find performance-optimized approach for detect game over
+    if (allCardsFlipped()) {
+      setTimeout(() => {
+        dispatch({ type: 'END_GAME' });
+      }, 800);
+    }
+  }, [state.cardsData]);
 
   function shuffleArray(array) {
     let idCounter = 0;
@@ -40,6 +50,10 @@ function MemoryGame() {
     }
     return pairsArray;
   }
+  const resetCards = () => {
+    dispatch({ type: 'SET_FIRST_CARD', payload: null });
+    dispatch({ type: 'SET_SECOND_CARD', payload: null });
+  };
 
   const checkForMatch = () => {
     console.log('checkForMatch');
@@ -47,22 +61,18 @@ function MemoryGame() {
     if (firstCard && secondCard) {
       console.log('firstCard: ', firstCard.name, 'secondCard: ', secondCard.name);
       if (firstCard.name === secondCard.name) {
-        dispatch({ type: 'LOCK_BOARD', payload: true });
         setTimeout(() => {
           console.log('match');
           dispatch({ type: 'LOCK_BOARD', payload: false });
-          dispatch({ type: 'FLIP_CARD', payload: firstCard });
-          dispatch({ type: 'FLIP_CARD', payload: secondCard });
-          lockCards();
+          dispatch({ type: 'FLIP_CARD', payload: null });
+          dispatch({ type: 'FLIP_CARD', payload: null });
         }, 1600);
       } else {
         dispatch({ type: 'LOCK_BOARD', payload: true });
         setTimeout(() => {
+          dispatch({ type: 'UNFLIP_CARDS', payload: [firstCard.id, secondCard.id] });
           dispatch({ type: 'FlIP_CARD', payload: firstCard });
           dispatch({ type: 'FlIP_CARD', payload: secondCard });
-          dispatch({ type: 'SET_FIRST_CARD', payload: null });
-          dispatch({ type: 'SET_SECOND_CARD', payload: null });
-          dispatch({ type: 'UNFLIP_CARDS', payload: [firstCard.id, secondCard.id] });
           dispatch({ type: 'LOCK_BOARD', payload: false });
         }, 1600);
       }
@@ -78,7 +88,7 @@ function MemoryGame() {
     } else if (!state.secondCard) {
       dispatch({ type: 'SET_SECOND_CARD', payload: card });
       dispatch({ type: 'SWITCH_PLAYER' });
-
+      dispatch({ type: 'LOCK_BOARD', payload: true });
       // moved to useEffect to update state:
       //checkForMatch();
     }
@@ -88,6 +98,10 @@ function MemoryGame() {
   const handleStart = () => {
     dispatch({ type: 'START_GAME' });
     console.log('start game');
+  };
+
+  const allCardsFlipped = () => {
+    return state.cardsData.every(card => card.isFlipped);
   };
 
   return (
