@@ -85,25 +85,41 @@ function MemoryGame() {
     dispatch({ type: 'FLIP_CARD', payload: card.id });
   };
 
+  const handleStart = () => {
+    dispatch({ type: 'START_GAME' });
+    console.log('start game');
+  };
 
-    return (
-        <div className="container">
-          <h1>memory 1312</h1>
-          <h2>player <strong>{state.currentPlayer.name}'s</strong> turn</h2>
-          <section className="board">
-            {state.cardsData.map((card, id) => (
-              <MemoryCard
-                card={card}
-                key={id}
-                name={card.name}
-                image={card.image}
-                isFlipped={card.isFlipped}
-                onClick={handleCardClick}
-              />
-            ))}
-          </section>
-      </div>
-    );
+  return (
+      <div className="container">
+        <h1>memory 1312</h1>
+        <h2>player <strong>{state.arrOfPlayers[state.currentPlayerIndex].name}'s</strong> turn</h2>
+        {state.gameState === 'GAME_OVER' && (
+          <>
+            <h2>Game Over</h2>
+            <Button
+              onClick={handleStart}
+              text="Start Game"
+              >
+            </Button>
+          </>
+          )}
+        {state.gameState === 'PLAYING' && (
+        <section className="board">
+          {state.cardsData.map((card, id) => (
+            <MemoryCard
+              card={card}
+              key={id}
+              name={card.name}
+              image={card.image}
+              isFlipped={card.isFlipped}
+              onClick={handleCardClick}
+            />
+          ))}
+        </section>
+      )}
+    </div>
+  );
   }
 
   export default MemoryGame;

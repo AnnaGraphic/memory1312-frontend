@@ -4,13 +4,20 @@ import React from "react";
 export const GameContext = createContext();
 export const useGameContext = () => useContext(GameContext);
 
+const GameStates = {
+  LOADING: 'LOADING',
+  PLAYING: 'PLAYING',
+  GAME_OVER: 'GAME_OVER',
+};
+
 const initialState = {
   cardsData: [],
   firstCard: null,
   secondCard: null,
   lockBoard: false,
-  currentPlayer: {name: "van Damme", id: 1},
+  currentPlayerIndex: 0,
   arrOfPlayers: [{name: "van Damme", id: 1}, {name: "Madonna", id: 2}],
+  gameState: GameStates.GAME_OVER,
 };
 
 function reducer(state, action) {
@@ -37,6 +44,15 @@ function reducer(state, action) {
           action.payload.includes(card.id) ? { ...card, isFlipped: false } : card
         )
       };
+    case 'SWITCH_PLAYER':
+      return {
+        ...state,
+        currentPlayerIndex: state.currentPlayerIndex === 0 ? 1 : 0
+      };
+    case 'START_GAME':
+      return { ...state, gameState: GameStates.PLAYING };
+    case 'END_GAME':
+      return { ...state, gameState: GameStates.GAME_OVER };
     default:
       return state;
   }
