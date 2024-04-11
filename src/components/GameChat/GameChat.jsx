@@ -1,5 +1,7 @@
+import './GameChat.css'
 import { useState, useEffect } from 'react';
-import {socket} from '../../socket.js';
+import { socket } from '../../socket.js';
+import { useGameContext } from '../../contexts/gameContext';
 
 function GameChat() {
 const [ messages, setMessages ] = useState([]);
@@ -18,7 +20,6 @@ const [ gameState, setGameState ] = useState(null);
   }, []);
 
   const sendMessage = () => {
-    console.log(input);
     socket.emit('chat message', input);
     setInput('');
   };
