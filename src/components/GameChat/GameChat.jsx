@@ -4,14 +4,13 @@ import { socket } from '../../socket.js';
 import { useGameContext } from '../../contexts/gameContext';
 
 function GameChat() {
-const [ messages, setMessages ] = useState([]);
-const [ input, setInput ] = useState('');
-const [ gameState, setGameState ] = useState(null);
+  const { state, dispatch } = useGameContext();
+  const [ input, setInput ] = useState('');
+  const messages = state.messages;
 
   useEffect(() => {
     socket.on('chat message', (msg) => {
-      setMessages((prevMessages) => [...prevMessages, msg]);
-      console.log('messages', messages);
+      dispatch({ type: 'NEW_MESSAGE', payload:  msg })
     });
   
     socket.on('game state', (state) => {

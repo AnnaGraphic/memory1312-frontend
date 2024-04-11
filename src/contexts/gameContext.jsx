@@ -18,6 +18,7 @@ const initialState = {
   currentPlayerIndex: 0,
   arrOfPlayers: [{name: "van Damme", id: 1}, {name: "Madonna", id: 2}],
   gameState: GameStates.GAME_OVER,
+  messages: [],
 };
 
 function reducer(state, action) {
@@ -53,6 +54,8 @@ function reducer(state, action) {
       return { ...state, gameState: GameStates.PLAYING };
     case 'END_GAME':
       return { ...state, gameState: GameStates.GAME_OVER };
+    case 'NEW_MESSAGE':
+      return { ...state, messages: [...state.messages, action.payload] };
     default:
       return state;
   }
