@@ -7,6 +7,7 @@ import { socket } from '../../socket.js';
 import { useGameLogic } from '../../hooks/useGameLogic'
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
+import { checkForMatch } from '../../utils/checkForMatch.js';
 
 function MemoryGame() {
   const { state, dispatch } = useGameContext();
@@ -30,7 +31,7 @@ function MemoryGame() {
   }, []);
 
   useEffect(() => {
-    checkForMatch();
+    checkForMatch(state, dispatch);
     resetCards();
   }, [state.secondCard]);
 
@@ -52,34 +53,11 @@ function MemoryGame() {
       [pairsArray[i], pairsArray[j]] = [pairsArray[j], pairsArray[i]];
     }
     return pairsArray;
-  }
   const resetCards = () => {
     dispatch({ type: 'SET_FIRST_CARD', payload: null });
     dispatch({ type: 'SET_SECOND_CARD', payload: null });
   };
 
-  const checkForMatch = () => {
-    console.log('checkForMatch');
-    const { firstCard, secondCard } = state;
-    if (firstCard && secondCard) {
-      console.log('firstCard: ', firstCard.name, 'secondCard: ', secondCard.name);
-      if (firstCard.name === secondCard.name) {
-        setTimeout(() => {
-          console.log('match');
-          dispatch({ type: 'LOCK_BOARD', payload: false });
-          dispatch({ type: 'FLIP_CARD', payload: null });
-          dispatch({ type: 'FLIP_CARD', payload: null });
-        }, 1600);
-      } else {
-        dispatch({ type: 'LOCK_BOARD', payload: true });
-        setTimeout(() => {
-          dispatch({ type: 'UNFLIP_CARDS', payload: [firstCard.id, secondCard.id] });
-          dispatch({ type: 'FlIP_CARD', payload: firstCard });
-          dispatch({ type: 'FlIP_CARD', payload: secondCard });
-          dispatch({ type: 'LOCK_BOARD', payload: false });
-        }, 1600);
-      }
-    }
   };
 
   const handleCardClick = (card) => {
