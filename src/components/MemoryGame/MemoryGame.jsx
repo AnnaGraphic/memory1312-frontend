@@ -4,13 +4,14 @@ import MemoryCard from '../MemoryCard/MemoryCard';
 import { useGameContext } from '../../contexts/gameContext';
 import { Button } from '../Button/SubmitButton';
 import { socket } from '../../socket.js';
-import { useGameLogic } from '../../hooks/useGameLogic'
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import { useGameLogic } from '../../hooks/useGameLogic';
 import { checkForMatch } from '../../utils/checkForMatch.js';
 
 function MemoryGame() {
   const { state, dispatch } = useGameContext();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
+  // ------ hooks ------
   useGameLogic(state, dispatch);
 
   useEffect(() => {
@@ -61,7 +62,6 @@ function MemoryGame() {
   };
 
   const handleCardClick = (card) => {
-    console.log('card clicked: ', card.name);
     if (state.lockBoard) return;
     if (!state.firstCard) {
       dispatch({ type: 'SET_FIRST_CARD', payload: card });
