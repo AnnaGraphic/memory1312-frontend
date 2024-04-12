@@ -19,25 +19,11 @@
   quit game: delete
 
 ## TODOs:
-### answer questions:
-  - [] how/when does the game start
-  - [] how (often) gamestate will be emmitted to players
-  - [] how/where to deploy
-  - [] centralised game logic: should the shuffling of cards, checking matches and determining the winner happen on the server?
-  - [] how to join?
   - [] what to show?
+    - [] joined players
     - [] usernames and scores?
     - [] cards!
     - [] time?
-### frontend
-    - [X] <del>reuse / clone an existing frontend i.o. to save time</del> - start from scratch
-### databases
-    - [] mongoDB / postgres?
-    - [] table for cards
-        - frontpic
-        - text/story shown after players found match
-        - additional: bundesland?
-    - [] table for players
-        - id
-        - name
-        - score
+  - [] let player create game
+  - [] let players join game
+  - [] chat: show names
