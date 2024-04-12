@@ -10,12 +10,12 @@ function GameChat() {
 
   useEffect(() => {
     socket.on('chat message', (msg) => {
-      dispatch({ type: 'NEW_MESSAGE', payload:  msg })
+      dispatch({ type: 'NEW_MESSAGE', payload: msg })
     });
-  
-    socket.on('game state', (state) => {
-      setGameState(state);
-    });
+
+    return () => {
+      socket.off('chat message');
+    }
   }, []);
 
   const sendMessage = () => {
