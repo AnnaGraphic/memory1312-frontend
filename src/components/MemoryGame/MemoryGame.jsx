@@ -40,12 +40,17 @@ function MemoryGame() {
     //TODO: find performance-optimized approach for detect game over
     if (allCardsFlipped()) {
       setTimeout(() => {
-        dispatch({ type: 'END_GAME' });
+        socket.emit('end game');
       }, 800);
     }
   }, [state.cardsData]);
 
-  function shuffleArray(array) {
+  const resetCards = () => {
+    dispatch({ type: 'SET_FIRST_CARD', payload: null });
+    dispatch({ type: 'SET_SECOND_CARD', payload: null });
+  };
+
+ function shuffleArray(array) {
     let idCounter = 0;
     // double cards to get pairs
     const pairsArray = array.flatMap(card => [{ ...card, id: idCounter++ }, { ...card, id: idCounter++ }]);
@@ -54,31 +59,26 @@ function MemoryGame() {
       [pairsArray[i], pairsArray[j]] = [pairsArray[j], pairsArray[i]];
     }
     return pairsArray;
-  const resetCards = () => {
-    dispatch({ type: 'SET_FIRST_CARD', payload: null });
-    dispatch({ type: 'SET_SECOND_CARD', payload: null });
-  };
-
   };
 
   const handleCardClick = (card) => {
     if (state.lockBoard) return;
     if (!state.firstCard) {
-      dispatch({ type: 'SET_FIRST_CARD', payload: card });
+      socket.emit('set first card', card);
       console.log('firstCard: ', state.firstCard);
     } else if (!state.secondCard) {
-      dispatch({ type: 'SET_SECOND_CARD', payload: card });
-      dispatch({ type: 'SWITCH_PLAYER' });
-      dispatch({ type: 'LOCK_BOARD', payload: true });
-      // moved to useEffect to update state:
-      //checkForMatch();
+      socket.emit('set second card', card);
     }
-    dispatch({ type: 'FLIP_CARD', payload: card.id });
+    socket.emit('flip card', card.id);
   };
 
   const handleStart = () => {
-    dispatch({ type: 'START_GAME' });
+    if (state.cardsData.length === 0) {
+      // TODO: error handling
+      console.log("no cards data");
+    }
     console.log('start game');
+    socket.emit('start game', state.cardsData)
   };
 
   const allCardsFlipped = () => {
