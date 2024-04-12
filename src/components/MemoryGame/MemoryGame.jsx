@@ -1,13 +1,16 @@
 import './MemoryGame.css';
-import { useEffect, useReducer } from 'react';
+import { useEffect } from 'react';
 import MemoryCard from '../MemoryCard/MemoryCard';
 import { useGameContext } from '../../contexts/gameContext';
 import { Button } from '../Button/SubmitButton';
+import { socket } from '../../socket.js';
+import { useGameLogic } from '../../hooks/useGameLogic'
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function MemoryGame() {
   const { state, dispatch } = useGameContext();
+  useGameLogic(state, dispatch);
 
   useEffect(() => {
     const fetchInitialCardsData = async () => {
