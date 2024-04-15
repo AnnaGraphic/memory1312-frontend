@@ -14,7 +14,7 @@ function MemoryCard({ card, name, image, onClick, isFlipped }) {
           <img src={image} alt={name} className="front-face" />
         </div>
         <div className={`card-back ${!isFlipped ? 'visible' : ''}`}>
-          <img src="img/backface.svg" alt="backface" className="back-face" />
+          <img src="src/assets/img/backface.jpg" alt="backface" className="back-face" />
         </div>
     </div>
   );
