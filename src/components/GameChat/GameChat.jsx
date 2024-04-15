@@ -19,15 +19,20 @@ function GameChat() {
   }, []);
 
   const sendMessage = () => {
-    socket.emit('chat message', input);
+    const playersName = state.playersName;
+    const msg = { playersName, text: input };
+    const room = state.selectedRoom;
+    console.log(msg)
+    socket.emit('chat message', msg, room);
     setInput('');
   };
    
   return (
     <div>
+      <h2>Chat</h2>
       <ul>
         {messages.map((msg, index) => (
-          <li key={index}>{msg}</li>
+          <li key={index}>{msg.playersName.player}: {msg.text}</li>
         ))}
       </ul>
       <input

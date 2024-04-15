@@ -24,6 +24,9 @@
     - [] usernames and scores?
     - [] cards!
     - [] time?
-  - [] let player create game
+    - [x] joined room
+  - [] find logic forlet players either create or join a room
+  - [x] let player create game
   - [] let players join game
   - [] chat: show names
+  - [] show modal with texts in case of a match

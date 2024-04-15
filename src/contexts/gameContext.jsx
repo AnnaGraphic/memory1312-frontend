@@ -11,6 +11,7 @@ const GameStates = {
 };
 
 const initialState = {
+  playersName: {'player': 'ffffff'},
   cardsData: [],
   firstCard: null,
   secondCard: null,
@@ -19,6 +20,7 @@ const initialState = {
   arrOfPlayers: [{name: "van Damme", id: 1}, {name: "Madonna", id: 2}],
   gameState: GameStates.GAME_OVER,
   messages: [],
+  selectedRoom: '',
 };
 
 function reducer(state, action) {
@@ -27,6 +29,10 @@ function reducer(state, action) {
       return { ...state, cardsData: action.payload };
     case 'SET_FIRST_CARD':
       return { ...state, firstCard: action.payload };
+    case 'SET_PLAYERS_NAME':
+      return { ...state, playersName: action.payload };
+    case 'SET_ROOM':
+      return { ...state, selectedRoom: action.payload };
     case 'SET_SECOND_CARD':
       return { ...state, secondCard: action.payload };
     case 'LOCK_BOARD':

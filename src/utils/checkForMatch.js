@@ -4,6 +4,7 @@ export const checkForMatch = (state, dispatch) => {
   if (firstCard && secondCard) {
     if (firstCard.name === secondCard.name) {
       setTimeout(() => {
+        // TODO: show modal
         console.log('match');
         dispatch({ type: 'LOCK_BOARD', payload: false });
         dispatch({ type: 'FLIP_CARD', payload: null });
@@ -11,7 +12,7 @@ export const checkForMatch = (state, dispatch) => {
       }, 1600);
     } else {
     dispatch({ type: 'LOCK_BOARD', payload: true });
-      console.log('no match')
+      console.log('no match');
       setTimeout(() => {
         dispatch({ type: 'UNFLIP_CARDS', payload: [firstCard.id, secondCard.id] });
         dispatch({ type: 'FLIP_CARD', payload: firstCard });

@@ -19,6 +19,20 @@ export const useGameLogic = (state, dispatch) => {
       dispatch({ type: 'START_GAME' });
     });
 
+    socket.on('room created', (room, shuffledCardsData, playersName) => {
+      //console.log('room created', shuffledCardsData);
+      dispatch({ type: 'SET_CARDS_DATA', payload: shuffledCardsData });
+      dispatch({ type: 'SET_ROOM', payload: room});
+      dispatch({ type: 'SET_PLAYERSNAME', payload: playersName });
+      console.log('playersName', playersName);
+      dispatch({ type: 'START_GAME' });
+    });
+
+    socket.on('room joined', (room) =>{
+      console.log('room joined');
+      dispatch({ type: 'SET_ROOM', payload: room});
+    });
+
     socket.on('set first card', (card) => {
       console.log(card.name);
       dispatch({ type: 'SET_FIRST_CARD', payload: card });
@@ -39,4 +53,5 @@ export const useGameLogic = (state, dispatch) => {
       socket.off('set second card');
     };
   }, [dispatch]);
+  return 
 };
