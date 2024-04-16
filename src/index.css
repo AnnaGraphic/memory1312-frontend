@@ -1,7 +1,8 @@
 :root {
-  --main-color: #ffff00;
-  --main-color-darker: #d1d10f;
+  --main-color: #ff00d0;
+  --main-color-darker: #dc00b3;
   --secondary-color: #25ee5e;
+  --whitish-color: #f0f0f0;
   --dark-color: #1b1b1b;
 }
 
@@ -12,6 +13,8 @@
 }
 
 .App {
+  display: flex;
+  justify-content: center;
   height: 100vh;
   width: 100vw;
   background-color: var(--dark-color);

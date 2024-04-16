@@ -16,7 +16,7 @@ const initialState = {
   secondCard: null,
   lockBoard: false,
   currentPlayerIndex: 0,
-  arrOfPlayers: [{name: "van Damme", id: 1}, {name: "Madonna", id: 2}],
+  arrOfPlayers: [{name: "van Damme", id: 1, color: 'ab48fc'}, {name: "Madonna", id: 2, color: '48fc51'}],
   gameState: GameStates.GAME_OVER,
   messages: [],
 };

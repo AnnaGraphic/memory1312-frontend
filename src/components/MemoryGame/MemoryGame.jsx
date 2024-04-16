@@ -86,34 +86,36 @@ function MemoryGame() {
   };
 
   return (
-      <div className="container">
-        <h1>memory 1312</h1>
-        <h2>player <strong>{state.arrOfPlayers[state.currentPlayerIndex].name}'s</strong> turn</h2>
-        {state.gameState === 'GAME_OVER' && (
-          <>
-            <h2>Game Over</h2>
-            <Button
-              onClick={handleStart}
-              text="Start Game"
-              >
-            </Button>
-          </>
-          )}
-        {state.gameState === 'PLAYING' && (
-        <section className="board">
-          {state.cardsData.map((card, id) => (
-            <MemoryCard
-              card={card}
-              key={id}
-              name={card.name}
-              image={card.image}
-              isFlipped={card.isFlipped}
-              onClick={handleCardClick}
-            />
-          ))}
-        </section>
-      )}
-    </div>
+     <>
+        <div className="container">
+          <h1>memory 1312</h1>
+          {state.gameState !== 'GAME_OVER' && (<h2>player <strong>{state.arrOfPlayers[state.currentPlayerIndex].name}'s</strong> turn</h2>)}
+          {state.gameState === 'GAME_OVER' && (
+            <>
+              <h2>Game Over</h2>
+              <Button
+                onClick={handleStart}
+                text="Start Game"
+                >
+              </Button>
+            </>
+            )}
+          {state.gameState === 'PLAYING' && (
+          <section className="board">
+            {state.cardsData.map((card, id) => (
+              <MemoryCard
+                card={card}
+                key={id}
+                name={card.name}
+                imageUrl={card.imageUrl}
+                isFlipped={card.isFlipped}
+                onClick={handleCardClick}
+              />
+            ))}
+          </section>
+        )}
+    `  </div>
+    </>
   );
   }
 

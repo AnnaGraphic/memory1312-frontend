@@ -20,7 +20,7 @@ export const useGameLogic = (state, dispatch) => {
     });
 
     socket.on('set first card', (card) => {
-      console.log(card.name);
+      console.log(card.imgageUrl);
       dispatch({ type: 'SET_FIRST_CARD', payload: card });
     });
 

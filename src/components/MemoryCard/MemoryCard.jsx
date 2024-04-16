@@ -1,6 +1,6 @@
 import './MemoryCard.css';
 
-function MemoryCard({ card, name, image, onClick, isFlipped }) {
+function MemoryCard({ card, name, imageUrl, onClick, isFlipped }) {
 
   const handleClick = () => {
     if(!isFlipped) {
@@ -11,7 +11,7 @@ function MemoryCard({ card, name, image, onClick, isFlipped }) {
   return (
     <div className={"card ${isFlipped ? 'flipped' : ''}"} onClick={handleClick} data-name={name}>
         <div className={`card-front ${isFlipped ? 'visible' : ''}`}>
-          <img src={image} alt={name} className="front-face" />
+          <img src={imageUrl} alt={name} className="front-face" />
         </div>
         <div className={`card-back ${!isFlipped ? 'visible' : ''}`}>
           <img src="src/assets/img/backface.jpg" alt="backface" className="back-face" />
