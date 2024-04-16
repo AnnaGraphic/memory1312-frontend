@@ -13,10 +13,17 @@ export const useGameLogic = (state, dispatch) => {
       dispatch({ type: 'END_GAME' });
     });
 
-    socket.on('game started', (cardsData) => {
+    socket.on('game started', (gameData) => {
       console.log('game started');
-      dispatch({ type: 'SET_CARDS_DATA', payload: cardsData });
+      dispatch({ type: 'SET_CARDS_DATA', payload: gameData.cardsData });
+      const arrOfPlayers = Object.values(gameData.objOfPlayers);
+      dispatch({ type: 'SET_PLAYERS', payload: arrOfPlayers });
       dispatch({ type: 'START_GAME' });
+    });
+
+    socket.on('set player', (player) => {
+      //console.log('set player: ', player);
+      dispatch({ type: 'SET_PLAYER', payload: player });
     });
 
     socket.on('set first card', (card) => {

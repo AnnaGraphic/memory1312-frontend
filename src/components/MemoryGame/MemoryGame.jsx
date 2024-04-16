@@ -78,7 +78,7 @@ function MemoryGame() {
       console.log("no cards data");
     }
     console.log('start game');
-    socket.emit('start game', state.cardsData)
+    socket.emit('start game', { cardsData: state.cardsData })
   };
 
   const allCardsFlipped = () => {
@@ -89,7 +89,7 @@ function MemoryGame() {
      <>
         <div className="container">
           <h1>memory 1312</h1>
-          {state.gameState !== 'GAME_OVER' && (<h2>player <strong>{state.arrOfPlayers[state.currentPlayerIndex].name}'s</strong> turn</h2>)}
+          {state.gameState !== 'GAME_OVER' && (<h2>player <strong>{state.arrOfPlayers[state.currentPlayerIndex]?.name}'s</strong> turn</h2>)}
           {state.gameState === 'GAME_OVER' && (
             <>
               <h2>Game Over</h2>

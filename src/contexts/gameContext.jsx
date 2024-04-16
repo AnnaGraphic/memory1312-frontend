@@ -11,12 +11,13 @@ const GameStates = {
 };
 
 const initialState = {
+  player: {},
   cardsData: [],
   firstCard: null,
   secondCard: null,
   lockBoard: false,
   currentPlayerIndex: 0,
-  arrOfPlayers: [{name: "van Damme", id: 1, color: 'ab48fc'}, {name: "Madonna", id: 2, color: '48fc51'}],
+  arrOfPlayers: [],
   gameState: GameStates.GAME_OVER,
   messages: [],
 };
@@ -56,6 +57,10 @@ function reducer(state, action) {
       return { ...state, gameState: GameStates.GAME_OVER };
     case 'NEW_MESSAGE':
       return { ...state, messages: [...state.messages, action.payload] };
+    case 'SET_PLAYER':
+      return { ...state, player: action.payload };
+    case 'SET_PLAYERS':
+      return { ...state, arrOfPlayers: action.payload };
     default:
       return state;
   }
