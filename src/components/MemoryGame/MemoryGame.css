@@ -7,8 +7,9 @@
 }
 
 .board {
-  display: grid;
-  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 3rem;
   grid-template-columns: repeat(4, 9rem);
   place-items: center;
@@ -21,4 +22,5 @@ h2 {
 
 h2 strong {
   color: var(--main-color);
+  max-width: 90%;
 }

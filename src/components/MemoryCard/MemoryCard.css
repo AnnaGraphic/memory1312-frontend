@@ -1,21 +1,20 @@
 @import '/src/index.css';
 
 .card {
-  width: 100px;
-  height: 100px;
+  width: 9rem;
+  height: 9rem;
+  margin: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border-radius: 5%;
-  box-shadow: 0 0 0.2rem 0.5rem rgba(0, 0, 0, 10%);
+  box-shadow: 0 0 0.2rem 0.5rem rgba(255, 0, 162, 1%);
 }
 
 .card:active {
   transition: 100ms all ease-in-out;
-  width: 98px;
-  height: 98px;
-  box-shadow: 0 0 0.05rem 0.05rem rgba(0, 0, 0, 10%);
+  box-shadow: 0 0 0.05rem 0.05rem rgba(255, 0, 162, 10);
 }
 
 .card img {
