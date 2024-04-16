@@ -1,7 +1,17 @@
 @import '/src/index.css';
 
-ul {
+.game-chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0 0 1rem;
+}
+
+.ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+}
+
+.ul li {
+    white-space: pre-wrap;
 }
