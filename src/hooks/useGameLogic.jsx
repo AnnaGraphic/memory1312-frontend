@@ -4,7 +4,7 @@ import { socket } from '../socket';
 export const useGameLogic = (state, dispatch) => {
   useEffect(() => {
 
-     socket.on('card flipped', (cardId) => {
+    socket.on('card flipped', (cardId) => {
       console.log('card flipped');
       dispatch({ type: 'FLIP_CARD', payload: cardId});
     })
